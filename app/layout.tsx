@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
+import AuthProvider from "@/config/auth-provider";
 
 export const metadata: Metadata = {
   title: "Product List App",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
