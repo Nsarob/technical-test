@@ -1,4 +1,4 @@
-# 🧪 Developer Technical Test – Product List App
+# 🧪 Developer Technical Exercise – Product List App
 
 ## 🧩 Goal
 
