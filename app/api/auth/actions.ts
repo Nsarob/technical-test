@@ -5,16 +5,22 @@ import { AuthError } from "next-auth";
 
 export async function authenticate(email: string) {
   try {
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
       email,
       redirect: false,
     });
+    
+    if (result?.error) {
+      return { success: false, error: result.error };
+    }
+    
     return { success: true };
   } catch (error) {
     if (error instanceof AuthError) {
       return { success: false, error: "Authentication failed" };
     }
-    throw error;
+    console.error("Authentication error:", error);
+    return { success: false, error: "Authentication failed" };
   }
 }
 

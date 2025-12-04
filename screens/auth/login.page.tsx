@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Input from "@/layout/input.layout";
 import Button from "@/layout/button.layout";
 import Card from "@/layout/card.layout";
-import { authenticate } from "@/app/api/auth/actions";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -31,13 +31,23 @@ export default function LoginPage() {
       return;
     }
 
-    const result = await authenticate(email);
+    try {
+      const result = await signIn("credentials", {
+        email,
+        redirect: false,
+        callbackUrl: "/products",
+      });
 
-    if (result.success) {
-      router.push("/products");
-      router.refresh();
-    } else {
-      setError(result.error || "Authentication failed");
+      if (result?.error) {
+        setError("Authentication failed. Please try again.");
+        setLoading(false);
+      } else if (result?.ok) {
+        router.push("/products");
+        router.refresh();
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Authentication failed. Please try again.");
       setLoading(false);
     }
   };
