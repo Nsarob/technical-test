@@ -33,22 +33,26 @@ A fullstack Next.js application for managing personal product lists with email-o
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Nsarob/technical-test.git
 cd technical-test
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env
 ```
 
 Edit `.env` and add your values:
+
 ```env
 DATABASE_URL="file:./dev.db"
 NEXTAUTH_SECRET="your-secret-key-here"
@@ -56,12 +60,14 @@ NEXTAUTH_URL="http://localhost:3000"
 ```
 
 4. Generate Prisma client and run migrations:
+
 ```bash
 npm run prisma:generate
 npm run prisma:migrate
 ```
 
 5. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -99,11 +105,13 @@ No passwords are required - authentication is simplified for this demo.
 ## 🗄️ Database Schema
 
 ### User
+
 - `id`: Unique identifier
 - `email`: User email (unique)
 - `createdAt`: Timestamp
 
 ### Product
+
 - `id`: Unique identifier
 - `name`: Product name
 - `amount`: Product price/amount
